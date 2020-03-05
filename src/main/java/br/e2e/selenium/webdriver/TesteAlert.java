@@ -1,6 +1,7 @@
-package br.e2e.selenium;
+package br.e2e.selenium.webdriver;
 
-import static br.e2e.selenium.Util.getPageFromResource;
+import static br.e2e.selenium.util.TestUtil.getChromeDriver;
+import static br.e2e.selenium.util.TestUtil.getPageFromResource;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -16,7 +17,7 @@ public class TesteAlert {
 
 	@Before
 	public void setUp() {
-		driver = Util.getChromeDriver();
+		driver = getChromeDriver();
 	}
 	
 	@After

@@ -1,4 +1,4 @@
-package br.e2e.selenium;
+package br.e2e.selenium.webdriver;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,4 +1,7 @@
-package br.e2e.selenium;
+package br.e2e.selenium.webdriver;
+
+import static br.e2e.selenium.util.TestUtil.getChromeDriver;
+import static br.e2e.selenium.util.TestUtil.getPageFromResource;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -8,15 +11,13 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import static br.e2e.selenium.Util.getPageFromResource;
-
 public class TesteFramesEJanelas {
 
 	private WebDriver driver;
 
 	@Before
 	public void setUp() {
-		driver = Util.getChromeDriver();
+		driver = getChromeDriver();
 	}
 
 	@After
