@@ -1,5 +1,6 @@
 package br.e2e.selenium;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,11 @@ public class TesteFramesEJanelas {
 		driver = Util.getChromeDriver();
 	}
 
+	@After
+	public void finalize() {
+		driver.quit();
+	}
+
 	@Test
 	public void deveInteragirComFrames() {
 		getPageFromResource(this.driver, "componentes.html");
@@ -31,8 +37,7 @@ public class TesteFramesEJanelas {
 
 		driver.switchTo().defaultContent();
 		driver.findElement(By.id("elementosForm:nome")).sendKeys(msg);
-		
-		driver.quit();
+
 	}
 
 	@Test
@@ -45,8 +50,6 @@ public class TesteFramesEJanelas {
 		driver.close();
 		driver.switchTo().window("");
 		driver.findElement(By.tagName("textarea")).sendKeys("e agora?");
-		
-		driver.quit();
 
 	}
 
@@ -62,6 +65,5 @@ public class TesteFramesEJanelas {
 		driver.switchTo().window((String) driver.getWindowHandles().toArray()[0]);
 		driver.findElement(By.tagName("textarea")).sendKeys("E agora?");
 
-		driver.quit();
 	}
 }

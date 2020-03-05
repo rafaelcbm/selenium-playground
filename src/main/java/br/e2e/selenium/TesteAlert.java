@@ -2,6 +2,7 @@ package br.e2e.selenium;
 
 import static br.e2e.selenium.Util.getPageFromResource;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +18,11 @@ public class TesteAlert {
 	public void setUp() {
 		driver = Util.getChromeDriver();
 	}
+	
+	@After
+	public void finalize() {
+		driver.quit();
+	}
 
 	@Test
 	public void deveInteragirComAlertSimples() {
@@ -30,8 +36,6 @@ public class TesteAlert {
 		alert.accept();
 
 		driver.findElement(By.id("elementosForm:nome")).sendKeys(texto);
-
-		driver.quit();
 	}
 
 	@Test
@@ -52,8 +56,6 @@ public class TesteAlert {
 		alerta.dismiss();
 		Assert.assertEquals("Negado", alerta.getText());
 		alerta.dismiss();
-
-		driver.quit();
 	}
 
 	@Test
@@ -70,7 +72,5 @@ public class TesteAlert {
 		alerta.accept();
 		Assert.assertEquals(":D", alerta.getText());
 		alerta.accept();
-
-		driver.quit();
 	}
 }
