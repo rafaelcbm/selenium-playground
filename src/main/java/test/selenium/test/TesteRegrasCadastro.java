@@ -1,13 +1,11 @@
-package br.e2e.selenium.dsl;
+package test.selenium.test;
 
-import static br.e2e.selenium.util.TestUtil.getChromeDriver;
-import static br.e2e.selenium.util.TestUtil.getPageFromResource;
+import static test.selenium.core.DriverFactory.getDriver;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,14 +13,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
-import org.openqa.selenium.WebDriver;
 
-import br.e2e.selenium.po.CampoTreinamentoPage;
+import test.selenium.core.BaseTest;
+import test.selenium.core.DSL;
+import test.selenium.page.CampoTreinamentoPage;
 
 @RunWith(Parameterized.class)
-public class TesteRegrasCadastro {
+public class TesteRegrasCadastro extends BaseTest {
 
-	private WebDriver driver;
 	private DSL dsl;
 	private CampoTreinamentoPage page;
 	
@@ -39,18 +37,12 @@ public class TesteRegrasCadastro {
 	@Parameter(value=5)
 	public String msg;
 	
-	
+
 	@Before
 	public void inicializa(){
-		driver = getChromeDriver();
-		getPageFromResource(this.driver, "componentes.html");		
-		dsl = new DSL(driver);
-		page = new CampoTreinamentoPage(driver);
-	}
-
-	@After
-	public void finaliza(){
-		driver.quit();
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
+		page = new CampoTreinamentoPage();
 	}
 	
 	@Parameters

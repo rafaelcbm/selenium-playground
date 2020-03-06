@@ -1,7 +1,6 @@
-package br.e2e.selenium.dsl;
+package test.selenium.test;
 
-import static br.e2e.selenium.util.TestUtil.getChromeDriver;
-import static br.e2e.selenium.util.TestUtil.getPageFromResource;
+import static test.selenium.core.DriverFactory.getDriver;
 
 import java.util.concurrent.TimeUnit;
 
@@ -9,25 +8,25 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import test.selenium.core.DSL;
+import test.selenium.core.DriverFactory;
+
 public class TesteSincronismo {
 
-	private WebDriver driver;
 	private DSL dsl;
 
 	@Before
 	public void inicializa(){
-		driver = getChromeDriver();
-		getPageFromResource(this.driver, "componentes.html");		
-		dsl = new DSL(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
 	}
 	
 	@After
 	public void finaliza(){
-		driver.quit();
+		DriverFactory.killDriver();
 	}
 	
 	@Test
@@ -39,17 +38,17 @@ public class TesteSincronismo {
 	
 	@Test
 	public void deveUtilizarEsperaImplicita() throws InterruptedException{
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		dsl.clicarBotao("buttonDelay");
 		dsl.escrever("novoCampo", "Deu certo?");
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+		getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 	}
 	
 
 	@Test
 	public void deveUtilizarEsperaExplicita() throws InterruptedException{
 		dsl.clicarBotao("buttonDelay");
-		WebDriverWait wait = new WebDriverWait(driver, 30);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("novoCampo")));
 		dsl.escrever("novoCampo", "Deu certo?");
 	}

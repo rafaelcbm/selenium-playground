@@ -1,7 +1,6 @@
-package br.e2e.selenium.dsl;
+package test.selenium.test;
 
-import static br.e2e.selenium.util.TestUtil.getChromeDriver;
-import static br.e2e.selenium.util.TestUtil.getPageFromResource;
+import static test.selenium.core.DriverFactory.getDriver;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,24 +11,24 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import test.selenium.core.DSL;
+import test.selenium.core.DriverFactory;
 
 public class TesteCampoTreinamento {
 	
-	private WebDriver driver;
 	private DSL dsl;
-	
+
 	@Before
 	public void inicializa(){
-		driver = getChromeDriver();
-		getPageFromResource(this.driver, "componentes.html");
-		dsl = new DSL(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
 	}
 	
 	@After
 	public void finaliza(){
-		driver.quit();
+		DriverFactory.killDriver();
 	}
 	
 	@Test
@@ -116,12 +115,12 @@ public class TesteCampoTreinamento {
 	
 	@Test
 	public void testJavascript(){
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor) getDriver();
 //		js.executeScript("alert('Testando js via selenium')");
 		js.executeScript("document.getElementById('elementosForm:nome').value = 'Escrito via js'");
 		js.executeScript("document.getElementById('elementosForm:sobrenome').type = 'radio'");
 		
-		WebElement element = driver.findElement(By.id("elementosForm:nome"));
+		WebElement element = getDriver().findElement(By.id("elementosForm:nome"));
 		js.executeScript("arguments[0].style.border = arguments[1]", element, "solid 4px red");
 	}
 	

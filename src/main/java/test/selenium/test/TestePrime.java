@@ -1,6 +1,6 @@
-package br.e2e.selenium.dsl;
+package test.selenium.test;
 
-import static br.e2e.selenium.util.TestUtil.getChromeDriver;
+import static test.selenium.core.DriverFactory.getDriver;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import test.selenium.core.DSL;
+
 public class TestePrime {
 
 	private WebDriver driver;
@@ -16,8 +18,8 @@ public class TestePrime {
 
 	@Before
 	public void inicializa() {
-		driver = getChromeDriver();
-		dsl = new DSL(driver);
+		getDriver().get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		dsl = new DSL();
 	}
 
 	@After

@@ -1,85 +1,77 @@
-package br.e2e.selenium.po;
+package test.selenium.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
-import br.e2e.selenium.dsl.DSL;
+import test.selenium.core.BasePage;
 
-public class CampoTreinamentoPage {
-	
-	private DSL dsl;
-	
-	public CampoTreinamentoPage(WebDriver driver) {
-		dsl = new DSL(driver);
-	}
+public class CampoTreinamentoPage extends BasePage {
 
 	public void setNome(String nome) {
 		dsl.escrever("elementosForm:nome", nome);
 	}
-	
+
 	public void setSobrenome(String sobrenome) {
 		dsl.escrever("elementosForm:sobrenome", sobrenome);
 	}
-	
-	public void setSexoMasculino(){
+
+	public void setSexoMasculino() {
 		dsl.clicarRadio("elementosForm:sexo:0");
 	}
-	
-	public void setSexoFeminino(){
+
+	public void setSexoFeminino() {
 		dsl.clicarRadio("elementosForm:sexo:1");
 	}
-	
-	public void setComidaCarne(){
+
+	public void setComidaCarne() {
 		dsl.clicarRadio("elementosForm:comidaFavorita:0");
 	}
-	
-	public void setComidaPizza(){
+
+	public void setComidaPizza() {
 		dsl.clicarRadio("elementosForm:comidaFavorita:2");
 	}
-	
-	public void setComidaVegetariano(){
+
+	public void setComidaVegetariano() {
 		dsl.clicarRadio("elementosForm:comidaFavorita:3");
 	}
-	
+
 	public void setEscolaridade(String valor) {
 		dsl.selecionarCombo("elementosForm:escolaridade", valor);
 	}
-	
+
 	public void setEsporte(String... valores) {
-		for(String valor: valores)
+		for (String valor : valores)
 			dsl.selecionarCombo("elementosForm:esportes", valor);
 	}
-	
-	public void cadastrar(){
+
+	public void cadastrar() {
 		dsl.clicarBotao("elementosForm:cadastrar");
 	}
-	
-	public String obterResultadoCadastro(){
+
+	public String obterResultadoCadastro() {
 		return dsl.obterTexto(By.xpath("//*[@id='resultado']/span"));
 	}
-	
-	
-	public String obterNomeCadastro(){
+
+	public String obterNomeCadastro() {
 		return dsl.obterTexto(By.xpath("//*[@id='descNome']/span"));
 	}
-	
-	public String obterSobrenomeCadastro(){
+
+	public String obterSobrenomeCadastro() {
 		return dsl.obterTexto(By.xpath("//*[@id='descSobrenome']/span"));
 	}
-	
-	public String obterSexoCadastro(){
+
+	public String obterSexoCadastro() {
 		return dsl.obterTexto(By.xpath("//*[@id='descSexo']/span"));
 	}
-	
-	public String obterComidaCadastro(){
+
+	public String obterComidaCadastro() {
 		return dsl.obterTexto(By.xpath("//*[@id='descComida']/span"));
 	}
-	
-	public String obterEscolaridadeCadastro(){
+
+	public String obterEscolaridadeCadastro() {
 		return dsl.obterTexto(By.xpath("//*[@id='descEscolaridade']/span"));
 	}
-	
-	public String obterEsportesCadastro(){
+
+	public String obterEsportesCadastro() {
 		return dsl.obterTexto(By.xpath("//*[@id='descEsportes']/span"));
 	}
 }

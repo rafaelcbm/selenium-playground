@@ -1,7 +1,8 @@
-package br.e2e.selenium.webdriver;
+package test.selenium.webdriver;
 
-import static br.e2e.selenium.util.TestUtil.getChromeDriver;
-import static br.e2e.selenium.util.TestUtil.getPageFromResource;
+import static test.selenium.core.DriverFactory.getDriver;
+import static test.selenium.core.DriverFactory.killDriver;
+import static test.selenium.webdriver.TestUtil.getPageFromResource;
 
 import java.util.List;
 
@@ -20,12 +21,12 @@ public class TesteCampoTreinamento {
 
 	@Before
 	public void setUp() {
-		driver = getChromeDriver();
+		driver = getDriver();
 	}
 
 	@After
 	public void finalize() {
-		driver.quit();
+		killDriver();
 	}
 
 	@Test
