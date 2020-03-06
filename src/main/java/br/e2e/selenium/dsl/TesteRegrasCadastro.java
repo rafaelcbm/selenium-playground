@@ -39,15 +39,15 @@ public class TesteRegrasCadastro {
 	@Parameter(value=5)
 	public String msg;
 	
-
+	
 	@Before
 	public void inicializa(){
 		driver = getChromeDriver();
-		getPageFromResource(this.driver, "componentes.html");
+		getPageFromResource(this.driver, "componentes.html");		
 		dsl = new DSL(driver);
 		page = new CampoTreinamentoPage(driver);
 	}
-	
+
 	@After
 	public void finaliza(){
 		driver.quit();

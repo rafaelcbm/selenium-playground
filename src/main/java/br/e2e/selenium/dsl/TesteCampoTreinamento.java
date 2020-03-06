@@ -19,7 +19,7 @@ public class TesteCampoTreinamento {
 	
 	private WebDriver driver;
 	private DSL dsl;
-
+	
 	@Before
 	public void inicializa(){
 		driver = getChromeDriver();
@@ -114,8 +114,6 @@ public class TesteCampoTreinamento {
 				dsl.obterTexto(By.className("facilAchar")));
 	}
 	
-
-	// Comentar o @After, para verificar a alteração
 	@Test
 	public void testJavascript(){
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -125,6 +123,11 @@ public class TesteCampoTreinamento {
 		
 		WebElement element = driver.findElement(By.id("elementosForm:nome"));
 		js.executeScript("arguments[0].style.border = arguments[1]", element, "solid 4px red");
+	}
+	
+	@Test
+	public void deveClicarBotaoTabela(){
+		dsl.clicarBotaoTabela("Escolaridade", "Mestrado", "Radio", "elementosForm:tableUsuarios");
 	}
 	
 }
